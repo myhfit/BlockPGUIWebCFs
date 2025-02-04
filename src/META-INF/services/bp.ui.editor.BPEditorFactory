@@ -1,0 +1,6 @@
+bp.ui.editor.BPHTMLPanel$BPEditorFactoryHTML
+bp.ui.editor.BPWebSiteOperationPanel$BPEditorFactoryWebSiteOperation
+bp.ui.editor.BPWebSiteConsolePanel$BPEditorFactoryWebSiteConsole
+bp.ui.editor.BPWebSearchEnginePanel$BPEditorFactoryWebSearchEnginePanel
+bp.ui.editor.BPWebNewsPanel$BPEditorFactoryWebNewsPanel
+bp.ui.editor.BPTransmissionPanel$BPEditorFactoryTransmissionPanel
