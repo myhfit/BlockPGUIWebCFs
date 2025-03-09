@@ -11,6 +11,7 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 import javax.swing.Action;
 import javax.swing.JPanel;
@@ -32,7 +33,6 @@ import bp.ui.util.UIStd;
 import bp.ui.util.UIUtil;
 import bp.util.NetworkUtil;
 import bp.util.Std;
-import bp.util.NetworkUtil.NetworkSendResult;
 
 public class BPToolGUINetAddress extends BPToolGUIBase<BPToolGUINetAddress.BPToolGUIContextNetAddress>
 {
@@ -69,8 +69,9 @@ public class BPToolGUINetAddress extends BPToolGUIBase<BPToolGUINetAddress.BPToo
 			scrollp.setViewportView(m_lstaddrs);
 			scrollr.setViewportView(m_txtinfo);
 
-			cmdbar.setActions(new Action[] { BPAction.separator(), acthost, actping });
+			cmdbar.setButtonSizePolicy(false, 0);
 			cmdbar.setBarHeight(18);
+			cmdbar.setActions(new Action[] { BPAction.separator(), acthost, actping });
 
 			m_txtaddr.setMonoFont();
 			m_txtinfo.setMonoFont();
@@ -112,11 +113,13 @@ public class BPToolGUINetAddress extends BPToolGUIBase<BPToolGUINetAddress.BPToo
 			InetAddress addr = m_lstaddrs.getSelectedValue();
 			if (addr != null)
 			{
-				NetworkSendResult r = NetworkUtil.sendPing(addr, 10000, false);
-				if (r.success)
-					m_txtinfo.setText(m_txtinfo.getText() + "\nTime:" + r.time + "ms");
-				else
-					m_txtinfo.setText(m_txtinfo.getText() + "\nUnreachable");
+				CompletableFuture.supplyAsync(() -> NetworkUtil.sendPing(addr, 10000, false)).whenComplete((r, err) ->
+				{
+					if (r != null && r.success)
+						UIUtil.laterUI(() -> m_txtinfo.setText(m_txtinfo.getText() + "\nTime:" + r.time + "ms"));
+					else
+						UIUtil.laterUI(() -> m_txtinfo.setText(m_txtinfo.getText() + "\nUnreachable"));
+				});
 			}
 		}
 

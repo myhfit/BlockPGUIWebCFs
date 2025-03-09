@@ -281,16 +281,13 @@ public class BPWebNewsPanel extends JPanel implements BPEditor<JPanel>
 			List<Action> rc = new ArrayList<Action>();
 			if (datas != null && datas.size() > 0)
 			{
-				Action actopen = BPAction.build("Open").callback((e) ->
-				{
-					open(datas);
-				}).getAction();
-				Action actview = BPAction.build("View").callback((e) ->
-				{
-					view(datas);
-				}).getAction();
+				Action actview = BPAction.build("View").callback(e -> view(datas)).getAction();
 				rc.add(actview);
-				rc.add(actopen);
+				if (datas.get(0).containsKey("url"))
+				{
+					Action actopen = BPAction.build("Open").callback(e -> open(datas)).getAction();
+					rc.add(actopen);
+				}
 			}
 			return rc;
 		}

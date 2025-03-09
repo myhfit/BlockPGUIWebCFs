@@ -67,6 +67,8 @@ public class BPHTMLPanel extends BPTextPanel
 
 		initActions();
 		add(m_sp, BorderLayout.CENTER);
+		
+		initListeners();
 
 		m_txt.setOnPosChanged(this::onPosChanged);
 		m_txt.resizeDoc();

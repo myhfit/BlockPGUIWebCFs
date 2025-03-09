@@ -20,7 +20,7 @@ import bp.ui.util.UIUtil;
 import bp.util.ClassUtil;
 import bp.util.ObjUtil;
 
-public class BPFormPanelWebSiteLink extends BPFormPanelFileSystem
+public class BPFormPanelWebSiteLink extends BPFormPanelResourceBase
 {
 	/**
 	 * 
