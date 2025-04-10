@@ -28,7 +28,6 @@ import javax.swing.JTable;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
-import javax.swing.border.MatteBorder;
 
 import bp.BPCore;
 import bp.config.BPConfig;
@@ -107,13 +106,14 @@ public class BPTransmissionPanel extends JPanel implements BPEditor<JPanel>
 		m_tabtasks.setTableFont();
 		m_pgselcolor = UIManager.getColor("Table.selectionBackground");
 
+		m_toolbar.setBorderVertical(0);
 		BPToolVIconButton btnadd = new BPToolVIconButton(BPAction.build("Add").callback(this::onAdd).tooltip("Add Task").vIcon(BPIconResV.ADD()).getAction());
 		BPToolVIconButton btnaddmagnet = new BPToolVIconButton(BPAction.build("Add Magnet").callback(this::onAddMagnet).tooltip("Add Magnet").vIcon(BPIconResV.ADD()).getAction());
 		BPToolVIconButton btndel = new BPToolVIconButton(BPAction.build("Del").callback(this::onDel).tooltip("Remove Task").acceleratorKey(KeyStroke.getKeyStroke(KeyEvent.VK_DELETE, 0)).vIcon(BPIconResV.DEL()).getAction(), this);
 		BPToolVIconButton btnstart = new BPToolVIconButton(BPAction.build("Start").callback(this::onStart).tooltip("Start Task").acceleratorKey(KeyStroke.getKeyStroke(KeyEvent.VK_F5, 0)).vIcon(BPIconResV.START()).getAction());
 		BPToolVIconButton btnstop = new BPToolVIconButton(BPAction.build("Stop").callback(this::onStop).tooltip("Stop Task").vIcon(BPIconResV.STOP()).getAction());
 		BPToolVIconButton btnedit = new BPToolVIconButton(BPAction.build("Edit").callback(this::onEdit).tooltip("Edit Task").vIcon(BPIconResV.EDIT()).getAction());
-		int btnsize = (int) (16f * UIConfigs.UI_SCALE());
+		int btnsize = (int) (((float) (UIConfigs.BAR_HEIGHT_VERTICAL() - 2)) * UIConfigs.UI_SCALE());
 		setupButtons(btnsize, btnadd, btndel, btnstart, btnstop, btnedit);
 
 		m_tabtasks.setModel(m_model);
@@ -127,7 +127,6 @@ public class BPTransmissionPanel extends JPanel implements BPEditor<JPanel>
 		m_toolbar.add(btnedit);
 
 		setLayout(new BorderLayout());
-		m_toolbar.setBorder(new MatteBorder(0, 0, 0, 1, UIConfigs.COLOR_WEAKBORDER()));
 		add(sp, BorderLayout.CENTER);
 		add(m_toolbar, BorderLayout.WEST);
 	}

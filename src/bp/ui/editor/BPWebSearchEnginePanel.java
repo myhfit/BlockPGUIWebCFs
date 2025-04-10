@@ -25,11 +25,9 @@ import bp.client.BPClientManager;
 import bp.client.BPClientWebSearchEngine;
 import bp.config.BPConfig;
 import bp.config.UIConfigs;
-import bp.data.BPTextContainer;
 import bp.format.BPFormat;
 import bp.format.BPFormatUnknown;
 import bp.res.BPResource;
-import bp.ui.BPViewer;
 import bp.ui.actions.BPAction;
 import bp.ui.container.BPToolBarSQ;
 import bp.ui.scomp.BPComboBox;
@@ -44,7 +42,7 @@ import bp.ui.util.CommonUIOperations;
 import bp.ui.util.UIStd;
 import bp.ui.util.UIUtil;
 
-public class BPWebSearchEnginePanel extends JPanel implements BPEditor<JPanel>, BPViewer<BPTextContainer>
+public class BPWebSearchEnginePanel extends JPanel implements BPEditor<JPanel>
 {
 	/**
 	 * 
@@ -55,7 +53,6 @@ public class BPWebSearchEnginePanel extends JPanel implements BPEditor<JPanel>, 
 	protected BPTable<Map<String, Object>> m_tabresult;
 	protected BPTableFuncsWebSearchResult m_resultfuncs;
 	protected BPComboBox<String> m_cmbses;
-	protected BPTextContainer m_con;
 	protected boolean m_needsave;
 	protected String m_id;
 	protected int m_channelid;
@@ -163,27 +160,6 @@ public class BPWebSearchEnginePanel extends JPanel implements BPEditor<JPanel>, 
 		return this;
 	}
 
-	@Override
-	public void bind(BPTextContainer con, boolean noread)
-	{
-		m_con = con;
-		if (!noread)
-		{
-
-		}
-	}
-
-	public void unbind()
-	{
-		if (m_con != null)
-			m_con.close();
-	}
-
-	public BPTextContainer getDataContainer()
-	{
-		return m_con;
-	}
-
 	public void focusEditor()
 	{
 	}
@@ -233,6 +209,11 @@ public class BPWebSearchEnginePanel extends JPanel implements BPEditor<JPanel>, 
 
 	public void setOnDynamicInfo(Consumer<String> info)
 	{
+	}
+
+	public String getEditorName()
+	{
+		return "Web Search Engine";
 	}
 
 	public static class BPTableFuncsWebSearchResult extends BPTableFuncsMapMethod
