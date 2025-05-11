@@ -168,6 +168,11 @@ public class BPWebSiteOperationResultPane extends JPanel
 	{
 		return (BPResourceWebSiteLink) m_cmbwslink.getSelectedItem();
 	}
+	
+	public void setWebSiteLink(BPResourceWebSiteLink wslink)
+	{
+		m_cmbwslink.setSelectedItem(wslink);
+	}
 
 	protected BPWebContext createWebContext()
 	{

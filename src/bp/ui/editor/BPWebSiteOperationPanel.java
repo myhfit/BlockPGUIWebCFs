@@ -49,10 +49,13 @@ public class BPWebSiteOperationPanel extends BPCodePanel
 	protected BPWebSiteOperationResultPane m_result;
 	protected BPSplitPane m_sp;
 	protected BPSplitPane m_sp0;
+	protected JPanel m_panright;
 
 	protected BPTextPane createTextPane()
 	{
-		return new BPWebSiteOperationPane();
+		BPWebSiteOperationPane rc = new BPWebSiteOperationPane();
+		UIUtil.createLinePanel(rc, m_psrc);
+		return rc;
 	}
 
 	protected void init()
@@ -64,7 +67,7 @@ public class BPWebSiteOperationPanel extends BPCodePanel
 		m_psrc = m_scroll;
 		m_result = new BPWebSiteOperationResultPane(this);
 		JPanel pansp = new JPanel();
-		JPanel panright = new JPanel();
+		m_panright = new JPanel();
 
 		m_txt = createTextPane();
 		m_opform = new BPFormPanelWebSiteOpeation();
@@ -72,11 +75,11 @@ public class BPWebSiteOperationPanel extends BPCodePanel
 		m_txt.setMonoFont();
 
 		pansp.setBorder(new MatteBorder(0, 0, 1, 0, UIConfigs.COLOR_WEAKBORDER()));
-		m_psrc.setBorder(new MatteBorder(0, 0, 0, 1, UIConfigs.COLOR_WEAKBORDER()));
+		m_psrc.setBorder(new MatteBorder(0, 0, 0, 0, UIConfigs.COLOR_WEAKBORDER()));
 		m_sp0.setBorder(new EmptyBorder(0, 0, 0, 0));
 		m_sp.setBorder(new EmptyBorder(0, 0, 0, 0));
 		m_psrc.setPreferredSize(new Dimension(1600, 0));
-		panright.setPreferredSize(new Dimension(200, 0));
+		m_panright.setPreferredSize(new Dimension(200, 0));
 		pansp.setPreferredSize(new Dimension(0, 600));
 		m_result.setPreferredSize(new Dimension(0, 200));
 
@@ -86,14 +89,14 @@ public class BPWebSiteOperationPanel extends BPCodePanel
 		m_sp0.setResizeWeight(0.75);
 
 		pansp.setLayout(new BorderLayout());
-		panright.setLayout(new BorderLayout());
+		m_panright.setLayout(new BorderLayout());
 		setLayout(new BorderLayout());
 		m_psrc.setViewportView(m_txt);
-		panright.add(m_opform, BorderLayout.CENTER);
+		m_panright.add(m_opform, BorderLayout.CENTER);
 		pansp.add(m_sp, BorderLayout.CENTER);
 		m_sp.setLeftComponent(m_psrc);
-		m_sp.setRightComponent(panright);
-		m_sp.setDividerBorderColor(UIConfigs.COLOR_STRONGBORDER(), false);
+		m_sp.setRightComponent(m_panright);
+		m_sp.setDividerBorderColor(UIConfigs.COLOR_WEAKBORDER(), UIConfigs.COLOR_STRONGBORDER());
 		m_sp.setDividerSize(4);
 		m_sp0.setLeftComponent(pansp);
 		m_sp0.setRightComponent(m_result);
@@ -175,8 +178,9 @@ public class BPWebSiteOperationPanel extends BPCodePanel
 		});
 	}
 
-	public void setContextByWebSiteLink(BPResourceWebSiteLink bpResourceWebSiteLink)
+	public void setContextByWebSiteLink(BPResourceWebSiteLink wslink)
 	{
+		m_result.setWebSiteLink(wslink);
 	}
 
 	protected void setLineProp()
@@ -233,6 +237,22 @@ public class BPWebSiteOperationPanel extends BPCodePanel
 			}
 		}
 		return rc;
+	}
+
+	public void toggleRightPanel()
+	{
+		if (m_panright.isVisible())
+		{
+			m_sp.remove(m_panright);
+			m_panright.setVisible(false);
+			m_sp.setDividerSize(0);
+		}
+		else
+		{
+			m_panright.setVisible(true);
+			m_sp.setRightComponent(m_panright);
+			m_sp.setDividerSize(4);
+		}
 	}
 
 	@SuppressWarnings("unchecked")

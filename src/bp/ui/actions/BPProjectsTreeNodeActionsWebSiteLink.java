@@ -23,11 +23,10 @@ public class BPProjectsTreeNodeActionsWebSiteLink
 	{
 		BPAction rc = BPAction.build("New").mnemonicKey(KeyEvent.VK_N).getAction();
 		BPResourceFileLocal f = new BPResourceFileLocal("untitled.wsconsole");
-		BPAction actneweditor = BPAction.build("WebSite Console").callback((e) ->
-		{
-			BPGUICore.EVENTS_UI.trigger(channelid, BPEventUIPathTree.makeActionEvent(ACTION_NEWFILEUNSAVED, f, res));
-		}).mnemonicKey(KeyEvent.VK_S).getAction();
-		rc.putValue(BPAction.SUB_ACTIONS, new Action[] { actneweditor });
+		BPAction actnewwsc = BPAction.build("WebSite Console").callback(e -> BPGUICore.EVENTS_UI.trigger(channelid, BPEventUIPathTree.makeActionEvent(ACTION_NEWFILEUNSAVED, f, res))).mnemonicKey(KeyEvent.VK_S).getAction();
+		BPResourceFileLocal f2 = new BPResourceFileLocal("untitled.wsop");
+		BPAction actnewwsop = BPAction.build("WebSite Operation").callback(e -> BPGUICore.EVENTS_UI.trigger(channelid, BPEventUIPathTree.makeActionEvent(ACTION_NEWFILEUNSAVED, f2, res))).mnemonicKey(KeyEvent.VK_W).getAction();
+		rc.putValue(BPAction.SUB_ACTIONS, new Action[] { actnewwsop, actnewwsc });
 		return rc;
 	}
 }

@@ -27,7 +27,7 @@ import bp.data.BPTextContainerBase;
 import bp.data.BPXData;
 import bp.data.BPXYDData;
 import bp.format.BPFormat;
-import bp.format.BPFormatWebSiteOperation;
+import bp.format.BPFormatWebSiteConsole;
 import bp.project.BPResourceProject;
 import bp.project.BPResourceProjectWebSite;
 import bp.res.BPResource;
@@ -274,11 +274,11 @@ public class BPWebSitePanel extends JPanel implements BPEditor<JPanel>, BPViewer
 		}
 	}
 
-	public final static class BPEditorFactoryWebSiteOperation implements BPEditorFactory
+	public final static class BPEditorFactoryWebSitePanel implements BPEditorFactory
 	{
 		public String[] getFormats()
 		{
-			return new String[] { BPFormatWebSiteOperation.FORMAT_WEBSITEOP };
+			return new String[] { BPFormatWebSiteConsole.FORMAT_WEBSITECONSOLE };
 		}
 
 		public BPEditor<?> createEditor(BPFormat format, BPResource res, BPConfig options, Object... params)
