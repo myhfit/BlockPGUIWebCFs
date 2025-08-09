@@ -14,7 +14,7 @@ public class BPWebSiteOperationTreeFuncs extends BPTreeFuncsObject
 
 	public List<?> getRoots()
 	{
-		return (List<?>) root;
+		return (List<?>) m_root;
 	}
 
 	public List<?> getChildren(BPTreeNode node, boolean isdelta)
@@ -30,7 +30,7 @@ public class BPWebSiteOperationTreeFuncs extends BPTreeFuncsObject
 
 	public void setWebOperations(List<BPWebOperation> ops)
 	{
-		root = ops;
+		m_root = ops;
 	}
 
 	public boolean isLeaf(BPTreeNode node)

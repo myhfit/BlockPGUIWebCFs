@@ -196,7 +196,7 @@ public class BPWebSiteConsolePanel extends JPanel implements BPEditor<JPanel>, B
 
 	protected void initVerbs()
 	{
-		List<String> verbs = Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS" );
+		List<String> verbs = Arrays.asList("GET", "POST", "PUT", "PATCH", "DELETE", "HEAD", "OPTIONS");
 		BPComboBoxModel<String> model = new BPComboBoxModel<String>();
 		model.setDatas(verbs);
 		m_cmbverb.setModel(model);

@@ -84,7 +84,7 @@ public class BPWebNewsPanel extends JPanel implements BPEditor<JPanel>
 		BPToolVIconButton btnclone = new BPToolVIconButton(actclone);
 		JScrollPane scroll = new JScrollPane();
 
-		toolbar.setBarHeight(UIConfigs.TEXTFIELD_HEIGHT() + 4);
+		toolbar.setBarHeight(UIConfigs.BAR_HEIGHT_COMBO());
 		scroll.setBorder(new EmptyBorder(0, 0, 0, 0));
 		m_resultfuncs.setColumns(new String[] { "title+content", "datestr" }, null);
 		m_resultfuncs.setColumnMethod(0, this::renderNews);

@@ -78,7 +78,7 @@ public class BPWebSearchEnginePanel extends JPanel implements BPEditor<JPanel>
 
 		m_txtkw.setLabelFont();
 		m_txtkw.setBorder(new CompoundBorder(new MatteBorder(0, 1, 0, 0, UIConfigs.COLOR_TEXTQUARTER()), new EmptyBorder(0, 1, 0, 1)));
-		toolbar.setBarHeight(UIConfigs.TEXTFIELD_HEIGHT() + 4);
+		toolbar.setBarHeight(UIConfigs.BAR_HEIGHT_COMBO());
 		scroll.setBorder(new EmptyBorder(0, 0, 0, 0));
 		m_resultfuncs.setColumns(new String[] { "titlecontent", "url", "date" }, null);
 		m_resultfuncs.setColumnMethod(0, (o) -> o.get("title") + "<br/><br/>" + o.get("content"));

@@ -1,6 +1,7 @@
 package bp.ui.form;
 
 import java.awt.Component;
+import java.awt.Window;
 import java.util.Map;
 
 import bp.BPCore;
@@ -10,7 +11,7 @@ import bp.res.BPResource;
 import bp.res.BPResourceFile;
 import bp.res.BPResourceFileSystem;
 import bp.res.BPResourceWebSiteLink;
-import bp.ui.dialog.BPDialogSelectResource;
+import bp.ui.dialog.BPDialogSelectResource2;
 import bp.ui.dialog.BPDialogSelectResourceDir;
 import bp.ui.scomp.BPTextField;
 import bp.ui.scomp.BPTextFieldPane;
@@ -109,9 +110,9 @@ public class BPFormPanelTaskWebSiteOperation extends BPFormPanelTask
 	protected String onSelectWSOP(String oldpath)
 	{
 		String rc = null;
-		BPDialogSelectResource dlg = new BPDialogSelectResource();
+		BPDialogSelectResource2 dlg = new BPDialogSelectResource2((Window) getFocusCycleRootAncestor());
 		dlg.setFilter(this::checkWSOP);
-		dlg.setVisible(true);
+		dlg.showOpen();
 		BPResource res = dlg.getSelectedResource();
 		if (res != null)
 		{
