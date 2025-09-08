@@ -147,8 +147,11 @@ public class BPWebSiteOperationPanel extends BPCodePanel
 
 	protected BPWebOperationBase getCurrentLineOP()
 	{
-		int l = m_txt.getCaretPosition();
-		String text = m_txt.getViewText();
+		BPTextPane txt = m_txt;
+		if (txt == null)
+			return null;
+		int l = txt.getCaretPosition();
+		String text = txt.getViewText();
 		int lp = text.lastIndexOf("\n", l - 1);
 		int np = text.indexOf("\n", l);
 		if (np == -1)
@@ -186,7 +189,8 @@ public class BPWebSiteOperationPanel extends BPCodePanel
 	protected void setLineProp()
 	{
 		BPWebOperationBase op = getCurrentLineOP();
-		m_opform.showData(op.getMappedData());
+		if (op != null)
+			m_opform.showData(op.getMappedData());
 	}
 
 	public final static class BPEditorFactoryWebSiteOperation implements BPEditorFactory

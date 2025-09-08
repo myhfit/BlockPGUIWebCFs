@@ -31,6 +31,7 @@ public class BPFormPanelWebSiteLink extends BPFormPanelResourceBase
 	protected BPTextField m_txtport;
 	protected BPTextField m_txtuser;
 	protected BPTextField m_txtpass;
+	protected BPTextField m_txtbasepath;
 	protected BPTextFieldPane m_pananalyzer;
 	protected BPTextField m_txtanalyzer;
 	protected BPComboBox<String> m_cmbprotocol;
@@ -41,6 +42,7 @@ public class BPFormPanelWebSiteLink extends BPFormPanelResourceBase
 		rc.put("host", m_txthost.getNotEmptyText());
 		IFVU(ObjUtil.toInt(m_txtport.getNotEmptyText(), 80), (v) -> rc.put("port", v));
 		rc.put("user", m_txtuser.getNotEmptyText());
+		rc.put("basepath", m_txtbasepath.getNotEmptyText());
 		rc.put("password", m_txtpass.getNotEmptyText());
 		rc.put("protocol", m_cmbprotocol.getSelectedItem());
 		rc.put("analyzer", m_txtanalyzer.getNotEmptyText());
@@ -54,6 +56,7 @@ public class BPFormPanelWebSiteLink extends BPFormPanelResourceBase
 		m_txtport = makeSingleLineTextField();
 		m_txtuser = makeSingleLineTextField();
 		m_txtpass = makeSingleLineTextField();
+		m_txtbasepath = makeSingleLineTextField();
 		m_cmbprotocol = makeComboBox(null);
 		m_pananalyzer = makeSingleLineTextFieldPanel(this::onAnalyzerFind);
 		m_txtanalyzer = m_pananalyzer.getTextComponent();
@@ -64,6 +67,7 @@ public class BPFormPanelWebSiteLink extends BPFormPanelResourceBase
 		addLine(new String[] { "Port" }, new Component[] { m_txtport });
 		addLine(new String[] { "Username" }, new Component[] { m_txtuser });
 		addLine(new String[] { "Password" }, new Component[] { m_txtpass });
+		addLine(new String[] { "BasePath" }, new Component[] { m_txtbasepath });
 		addLine(new String[] { "Protocol" }, new Component[] { m_cmbprotocol });
 		addSeparator("Advance");
 		addLine(new String[] { "Analyzer" }, new Component[] { m_pananalyzer });
@@ -105,6 +109,7 @@ public class BPFormPanelWebSiteLink extends BPFormPanelResourceBase
 		setComponentValue(m_txtport, data, "port", editable);
 		setComponentValue(m_txtuser, data, "user", editable);
 		setComponentValue(m_txtpass, data, "password", editable);
+		setComponentValue(m_txtbasepath, data, "basepath", editable);
 		setComponentValue(m_cmbprotocol, data, "protocol", editable);
 		setComponentValue(m_txtanalyzer, data, "analyzer", editable);
 	}
