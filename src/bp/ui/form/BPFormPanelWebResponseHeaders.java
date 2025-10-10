@@ -8,6 +8,7 @@ import java.util.Map;
 
 import bp.config.UIConfigs;
 import bp.ui.scomp.BPTextField;
+import bp.util.ObjUtil;
 
 public class BPFormPanelWebResponseHeaders extends BPFormPanel
 {
@@ -15,7 +16,7 @@ public class BPFormPanelWebResponseHeaders extends BPFormPanel
 	 * 
 	 */
 	private static final long serialVersionUID = -2681655595256639571L;
-	
+
 	public BPFormPanelWebResponseHeaders()
 	{
 		m_labelwidth = (int) (120 * UIConfigs.UI_SCALE());
@@ -39,14 +40,7 @@ public class BPFormPanelWebResponseHeaders extends BPFormPanel
 				BPTextField comp = makeSingleLineTextField();
 				List<String> values = (List<String>) data.get(key);
 				comp.setEditable(editable);
-				StringBuilder sb = new StringBuilder();
-				for (String value : values)
-				{
-					if (sb.length() > 0)
-						sb.append(" ");
-					sb.append(value);
-				}
-				comp.setText(sb.toString());
+				comp.setText(ObjUtil.joinDatas(values, " ", null, false));
 				addLine(new String[] { key == null ? "" : key }, new Component[] { comp });
 			}
 		}

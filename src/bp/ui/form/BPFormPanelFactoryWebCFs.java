@@ -10,5 +10,6 @@ public class BPFormPanelFactoryWebCFs implements BPFormPanelFactory
 		regfunc.accept("bp.res.BPResourceWebSiteLink", BPFormPanelWebSiteLink.class);
 		regfunc.accept("bp.task.BPTaskWebSiteOperation", BPFormPanelTaskWebSiteOperation.class);
 		regfunc.accept("bp.task.BPTaskSendPing", BPFormPanelTaskSendPing.class);
+		regfunc.accept("bp.task.BPTaskBrowser", BPFormPanelMap.class);
 	}
 }
