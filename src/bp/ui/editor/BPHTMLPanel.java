@@ -63,11 +63,12 @@ public class BPHTMLPanel extends BPTextPanel
 		m_sp.add(m_pdest);
 
 		psrc.setViewportView(m_txt);
+		m_scroll = psrc;
 		m_pdest.setViewportView(m_preview);
 
 		initActions();
 		add(m_sp, BorderLayout.CENTER);
-		
+
 		initListeners();
 
 		m_txt.setOnPosChanged(this::onPosChanged);
