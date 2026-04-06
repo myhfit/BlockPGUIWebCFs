@@ -29,6 +29,9 @@ import bp.format.BPFormat;
 import bp.format.BPFormatUnknown;
 import bp.res.BPResource;
 import bp.ui.actions.BPAction;
+import bp.ui.actions.BPActionConstCommon;
+import bp.ui.actions.BPActionConstWebCFs;
+import bp.ui.actions.BPActionHelpers;
 import bp.ui.container.BPToolBarSQ;
 import bp.ui.scomp.BPComboBox;
 import bp.ui.scomp.BPComboBox.BPComboBoxModel;
@@ -213,7 +216,7 @@ public class BPWebSearchEnginePanel extends JPanel implements BPEditor<JPanel>
 
 	public String getEditorName()
 	{
-		return "Web Search Engine";
+		return BPActionHelpers.getValue(BPActionConstWebCFs.TXT_WEBSEARCHENGINE);
 	}
 
 	public static class BPTableFuncsWebSearchResult extends BPTableFuncsMapMethod
@@ -221,10 +224,7 @@ public class BPWebSearchEnginePanel extends JPanel implements BPEditor<JPanel>
 		public List<Action> getActions(BPTable<Map<String, Object>> table, List<Map<String, Object>> datas, int[] rows, int r, int c)
 		{
 			List<Action> rc = new ArrayList<Action>();
-			Action actopen = BPAction.build("Open").callback((e) ->
-			{
-				open(datas);
-			}).getAction();
+			Action actopen = BPActionHelpers.getAction(BPActionConstCommon.CTX_MNUOPEN, e -> open(datas));
 			rc.add(actopen);
 			return rc;
 		}

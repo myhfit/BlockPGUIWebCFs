@@ -23,8 +23,9 @@ import javax.swing.event.ListSelectionEvent;
 
 import bp.config.UIConfigs;
 import bp.ui.actions.BPAction;
+import bp.ui.actions.BPActionConstWebCFs;
+import bp.ui.actions.BPActionHelpers;
 import bp.ui.container.BPToolBarSQ;
-import bp.ui.res.icon.BPIconResV;
 import bp.ui.scomp.BPList;
 import bp.ui.scomp.BPList.BPListModel;
 import bp.ui.scomp.BPTextField;
@@ -38,7 +39,7 @@ public class BPToolGUINetAddress extends BPToolGUIBase<BPToolGUINetAddress.BPToo
 {
 	public String getName()
 	{
-		return "Address Info";
+		return BPActionHelpers.getValue(BPActionConstWebCFs.TNAME_ADDRINFO, null, null);
 	}
 
 	protected BPToolGUIContextNetAddress createToolContext()
@@ -64,8 +65,8 @@ public class BPToolGUINetAddress extends BPToolGUIBase<BPToolGUINetAddress.BPToo
 			m_txtinfo.setBorder(new EmptyBorder(0, 0, 0, 0));
 			JScrollPane scrollp = new JScrollPane();
 			JScrollPane scrollr = new JScrollPane();
-			BPAction acthost = BPAction.build("gethost").tooltip("Get Hostname").vIcon(BPIconResV.DROPDOWN()).callback(this::onGetHost).getAction();
-			BPAction actping = BPAction.build("ping").tooltip("Send Ping").vIcon(BPIconResV.START()).callback(this::onSendPing).getAction();
+			BPAction acthost = BPActionHelpers.getAction(BPActionConstWebCFs.ACT_BTNGETHOST, this::onGetHost);
+			BPAction actping = BPActionHelpers.getAction(BPActionConstWebCFs.ACT_BTNSENDPING, this::onSendPing);
 			scrollp.setViewportView(m_lstaddrs);
 			scrollr.setViewportView(m_txtinfo);
 

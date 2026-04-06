@@ -34,6 +34,8 @@ import bp.format.BPFormat;
 import bp.format.BPFormatUnknown;
 import bp.res.BPResource;
 import bp.ui.actions.BPAction;
+import bp.ui.actions.BPActionConstCommon;
+import bp.ui.actions.BPActionHelpers;
 import bp.ui.actions.BPXYDataCloneActions;
 import bp.ui.container.BPToolBarSQ;
 import bp.ui.res.icon.BPIconResV;
@@ -281,11 +283,11 @@ public class BPWebNewsPanel extends JPanel implements BPEditor<JPanel>
 			List<Action> rc = new ArrayList<Action>();
 			if (datas != null && datas.size() > 0)
 			{
-				Action actview = BPAction.build("View").callback(e -> view(datas)).getAction();
+				Action actview = BPActionHelpers.getAction(BPActionConstCommon.CTX_MNUVIEW, e -> view(datas));
 				rc.add(actview);
 				if (datas.get(0).containsKey("url"))
 				{
-					Action actopen = BPAction.build("Open").callback(e -> open(datas)).getAction();
+					Action actopen = BPActionHelpers.getAction(BPActionConstCommon.CTX_MNUOPEN, e -> open(datas));
 					rc.add(actopen);
 				}
 			}

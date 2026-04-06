@@ -42,6 +42,7 @@ import bp.task.BPTask;
 import bp.task.BPTaskFactory;
 import bp.task.BPTaskTransmission;
 import bp.ui.actions.BPAction;
+import bp.ui.actions.BPActionConstCommon;
 import bp.ui.container.BPToolBarSQ;
 import bp.ui.dialog.BPDialogForm;
 import bp.ui.dialog.BPDialogNewTask;
@@ -415,7 +416,7 @@ public class BPTransmissionPanel extends JPanel implements BPEditor<JPanel>
 				return null;
 			}, task.getClass(), BPTask.class);
 			dlg.setup(c == null ? task.getClass().getName() : c.getName(), task);
-			dlg.setTitle("Task:" + task.getName());
+			dlg.setTitle(UIUtil.wrapBPTitle(BPActionConstCommon.TXT_TASK) + ":" + task.getName());
 			dlg.setPreferredSize(UIUtil.scaleUIDimension(new Dimension(700, 600)));
 			dlg.pack();
 			dlg.setLocationRelativeTo(null);

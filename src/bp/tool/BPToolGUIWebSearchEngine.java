@@ -2,6 +2,8 @@ package bp.tool;
 
 import java.awt.Container;
 
+import bp.ui.actions.BPActionConstWebCFs;
+import bp.ui.actions.BPActionHelpers;
 import bp.ui.editor.BPWebSearchEnginePanel;
 import bp.ui.frame.BPFrame;
 import bp.ui.util.UIUtil;
@@ -10,7 +12,7 @@ public class BPToolGUIWebSearchEngine extends BPToolGUIBase<BPToolGUIWebSearchEn
 {
 	public String getName()
 	{
-		return "Search Engines";
+		return BPActionHelpers.getValue(BPActionConstWebCFs.TNAME_SEARCHENGINE, null, null);
 	}
 
 	protected BPToolGUIContextWebSearchEngine createToolContext()
