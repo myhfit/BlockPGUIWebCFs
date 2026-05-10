@@ -39,7 +39,7 @@ public class BPToolGUINetAddress extends BPToolGUIBase<BPToolGUINetAddress.BPToo
 {
 	public String getName()
 	{
-		return BPActionHelpers.getValue(BPActionConstWebCFs.TNAME_ADDRINFO, null, null);
+		return BPActionConstWebCFs.TNAME_ADDRINFO.text();
 	}
 
 	protected BPToolGUIContextNetAddress createToolContext()

@@ -36,6 +36,7 @@ import bp.res.BPResourceWebSiteLink;
 import bp.ui.BPViewer;
 import bp.ui.actions.BPWebSiteConsolePanelActions;
 import bp.ui.container.BPToolBarSQ;
+import bp.ui.editor.controller.BPEditorController;
 import bp.ui.scomp.BPCodePane;
 import bp.ui.scomp.BPComboBox;
 import bp.ui.scomp.BPComboBox.BPComboBoxModel;
@@ -84,11 +85,13 @@ public class BPWebSiteConsolePanel extends JPanel implements BPEditor<JPanel>, B
 	protected boolean m_needsave;
 	protected List<BPWebOperation> m_ops = new ArrayList<BPWebOperation>();
 	protected JScrollPane m_scrolltree;
+	protected BPEditorController m_ec;
 
 	protected BiConsumer<String, Boolean> m_statechanged;
 
 	public BPWebSiteConsolePanel()
 	{
+		m_ec = new BPEditorController(this);
 		init();
 	}
 
@@ -405,5 +408,10 @@ public class BPWebSiteConsolePanel extends JPanel implements BPEditor<JPanel>, B
 
 	public void setOnDynamicInfo(Consumer<String> info)
 	{
+	}
+
+	public BPEditorController getEditorController()
+	{
+		return m_ec;
 	}
 }

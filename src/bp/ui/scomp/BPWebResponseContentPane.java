@@ -15,12 +15,13 @@ import bp.config.UIConfigs;
 import bp.format.BPFormat;
 import bp.format.BPFormatManager;
 import bp.format.BPFormatText;
+import bp.locale.BPLocaleConstCC;
 import bp.res.BPResourceByteArray;
 import bp.ui.editor.BPEditor;
 import bp.ui.editor.BPEditorFactory;
 import bp.ui.editor.BPEditorManager;
 import bp.ui.scomp.BPTable.BPTableModel;
-import bp.ui.table.BPTableFuncsBase;
+import bp.ui.table.BPTableFuncsSimple;
 import bp.ui.util.UIUtil;
 import bp.web.BPWebResponse;
 
@@ -32,10 +33,8 @@ public class BPWebResponseContentPane extends BPTabbedPanel
 	private static final long serialVersionUID = -5497809530760568516L;
 
 	protected BPTable<String[]> m_tabheader;
-	protected WebResponseTableFuncs m_headerfuncs;
 	protected JPanel m_pnlcontent;
 	protected Component m_ctlcontent;
-
 	private BPWebResponse m_resp;
 
 	public BPWebResponseContentPane()
@@ -47,12 +46,16 @@ public class BPWebResponseContentPane extends BPTabbedPanel
 	{
 		m_tabbar.setNoClose(true);
 		m_tabheader = new BPTable<String[]>();
-		m_headerfuncs = new WebResponseTableFuncs();
-		m_tabheader.setMonoFont();
-		m_tabheader.setModel(new BPTableModel<String[]>(m_headerfuncs));
-		m_tabheader.getColumnModel().getColumn(0).setPreferredWidth((int) (120 * UIConfigs.UI_SCALE()));
-		m_tabheader.getColumnModel().getColumn(1).setPreferredWidth((int) (400 * UIConfigs.UI_SCALE()));
-		m_tabheader.setAutoResizeMode(BPTable.AUTO_RESIZE_LAST_COLUMN);
+		{
+			BPTableFuncsSimple<String[]> headerfuncs = new BPTableFuncsSimple<String[]>();
+			headerfuncs.setValueGetter(BPWebResponseContentPane::getHeaderValue);
+			headerfuncs.setup(new String[] { "Key", "Value" }, new String[] { BPLocaleConstCC.KEY.text(), BPLocaleConstCC.VALUE.text() }, new Class<?>[] { String.class, String.class });
+			m_tabheader.setMonoFont();
+			m_tabheader.setModel(new BPTableModel<String[]>(headerfuncs));
+			m_tabheader.getColumnModel().getColumn(0).setPreferredWidth((int) (120 * UIConfigs.UI_SCALE()));
+			m_tabheader.getColumnModel().getColumn(1).setPreferredWidth((int) (400 * UIConfigs.UI_SCALE()));
+			m_tabheader.setAutoResizeMode(BPTable.AUTO_RESIZE_LAST_COLUMN);
+		}
 		JScrollPane scrollheader = new JScrollPane(m_tabheader);
 		scrollheader.setBorder(new EmptyBorder(0, 0, 0, 0));
 		m_pnlcontent = new JPanel();
@@ -145,17 +148,8 @@ public class BPWebResponseContentPane extends BPTabbedPanel
 		}
 	}
 
-	protected static class WebResponseTableFuncs extends BPTableFuncsBase<String[]>
+	protected final static Object getHeaderValue(String[] o, int row, int col)
 	{
-		public WebResponseTableFuncs()
-		{
-			m_colnames = new String[] { "Key", "Value" };
-			m_cols = new Class<?>[] { String.class, String.class };
-		}
-
-		public Object getValue(String[] o, int row, int col)
-		{
-			return o[col];
-		}
+		return o[col];
 	}
 }

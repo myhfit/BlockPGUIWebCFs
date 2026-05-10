@@ -38,6 +38,7 @@ import bp.ui.actions.BPActionConstCommon;
 import bp.ui.actions.BPActionHelpers;
 import bp.ui.actions.BPXYDataCloneActions;
 import bp.ui.container.BPToolBarSQ;
+import bp.ui.editor.controller.BPEditorController;
 import bp.ui.res.icon.BPIconResV;
 import bp.ui.scomp.BPComboBox;
 import bp.ui.scomp.BPComboBox.BPComboBoxModel;
@@ -65,9 +66,11 @@ public class BPWebNewsPanel extends JPanel implements BPEditor<JPanel>
 	protected boolean m_needsave;
 	protected String m_id;
 	protected int m_channelid;
+	protected BPEditorController m_ec;
 
 	public BPWebNewsPanel()
 	{
+		m_ec = new BPEditorController(this);
 		initUIComponents();
 		initDatas();
 	}
@@ -274,6 +277,11 @@ public class BPWebNewsPanel extends JPanel implements BPEditor<JPanel>
 		}
 		xydata.setDatas(xdatas);
 		return xydata;
+	}
+
+	public BPEditorController getEditorController()
+	{
+		return m_ec;
 	}
 
 	public static class BPTableFuncsWebNewsResult extends BPTableFuncsMapMethod

@@ -46,6 +46,7 @@ import bp.ui.actions.BPActionConstCommon;
 import bp.ui.container.BPToolBarSQ;
 import bp.ui.dialog.BPDialogForm;
 import bp.ui.dialog.BPDialogNewTask;
+import bp.ui.editor.controller.BPEditorController;
 import bp.ui.form.BPFormManager;
 import bp.ui.res.icon.BPIconResV;
 import bp.ui.scomp.BPProgressBar;
@@ -79,9 +80,11 @@ public class BPTransmissionPanel extends JPanel implements BPEditor<JPanel>
 	protected Consumer<BPEventCoreUI> m_changedhandler;
 
 	protected Color m_pgselcolor;
+	protected BPEditorController m_ec;
 
 	public BPTransmissionPanel()
 	{
+		m_ec = new BPEditorController(this);
 		initUIComponents();
 		initDatas();
 		initEvents();
@@ -449,6 +452,11 @@ public class BPTransmissionPanel extends JPanel implements BPEditor<JPanel>
 	protected void onTaskChanged(BPEventCoreUI event)
 	{
 		initDatas();
+	}
+
+	public BPEditorController getEditorController()
+	{
+		return m_ec;
 	}
 
 	public final static class BPEditorFactoryTransmissionPanel implements BPEditorFactory

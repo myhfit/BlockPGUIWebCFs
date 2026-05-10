@@ -3,8 +3,11 @@ package bp.ui.form;
 import java.awt.Component;
 import java.util.Map;
 
+import bp.locale.BPLocaleConstCoreDict;
+import bp.locale.BPLocaleHelpers;
 import bp.ui.scomp.BPCheckBox;
 import bp.ui.scomp.BPTextField;
+import bp.unit.BPUnitTimeScale;
 
 public class BPFormPanelTaskSendPing extends BPFormPanelTask
 {
@@ -31,8 +34,8 @@ public class BPFormPanelTaskSendPing extends BPFormPanelTask
 		m_txthost = makeSingleLineTextField();
 		m_chknanosec = makeCheckBox();
 
-		addLine(new String[] { "Host" }, new Component[] { m_txthost }, () -> !m_txthost.isEmpty());
-		addLine(new String[] { "Nano Second" }, new Component[] { m_chknanosec });
+		addLine(new String[] { BPLocaleHelpers.translate(BPLocaleConstCoreDict.S, "Host") }, new Component[] { m_txthost }, () -> !m_txthost.isEmpty());
+		addLine(new String[] { BPLocaleHelpers.translateByClass(BPUnitTimeScale.class, BPUnitTimeScale.NanoSecond.name()) }, new Component[] { m_chknanosec });
 	}
 
 	public void showData(Map<String, ?> data, boolean editable)

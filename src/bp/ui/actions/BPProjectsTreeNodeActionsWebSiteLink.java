@@ -21,7 +21,7 @@ public class BPProjectsTreeNodeActionsWebSiteLink
 
 	public BPAction getNewAction(BPTreeComponent<BPTree> tree, BPResourceWebSiteLink res, int channelid)
 	{
-		BPAction rc = BPAction.build("New").mnemonicKey(KeyEvent.VK_N).getAction();
+		BPAction rc = BPActionHelpers.getAction(BPActionConstCommon.CTX_MNUNEW, null);
 		BPResourceFileLocal f = new BPResourceFileLocal("untitled.wsconsole");
 		BPAction actnewwsc = BPAction.build("WebSite Console").callback(e -> BPGUICore.EVENTS_UI.trigger(channelid, BPEventUIPathTree.makeActionEvent(ACTION_NEWFILEUNSAVED, f, res))).mnemonicKey(KeyEvent.VK_S).getAction();
 		BPResourceFileLocal f2 = new BPResourceFileLocal("untitled.wsop");

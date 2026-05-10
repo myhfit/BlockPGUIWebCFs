@@ -33,6 +33,7 @@ import bp.ui.actions.BPActionConstCommon;
 import bp.ui.actions.BPActionConstWebCFs;
 import bp.ui.actions.BPActionHelpers;
 import bp.ui.container.BPToolBarSQ;
+import bp.ui.editor.controller.BPEditorController;
 import bp.ui.scomp.BPComboBox;
 import bp.ui.scomp.BPComboBox.BPComboBoxModel;
 import bp.ui.scomp.BPTable;
@@ -59,9 +60,11 @@ public class BPWebSearchEnginePanel extends JPanel implements BPEditor<JPanel>
 	protected boolean m_needsave;
 	protected String m_id;
 	protected int m_channelid;
+	protected BPEditorController m_ec;
 
 	public BPWebSearchEnginePanel()
 	{
+		m_ec = new BPEditorController(this);
 		initUIComponents();
 		initDatas();
 	}
@@ -217,6 +220,11 @@ public class BPWebSearchEnginePanel extends JPanel implements BPEditor<JPanel>
 	public String getEditorName()
 	{
 		return BPActionHelpers.getValue(BPActionConstWebCFs.TXT_WEBSEARCHENGINE);
+	}
+
+	public BPEditorController getEditorController()
+	{
+		return m_ec;
 	}
 
 	public static class BPTableFuncsWebSearchResult extends BPTableFuncsMapMethod
