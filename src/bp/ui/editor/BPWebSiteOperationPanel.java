@@ -243,9 +243,10 @@ public class BPWebSiteOperationPanel extends BPCodePanel
 		return rc;
 	}
 
-	public void toggleRightPanel()
+	public void toggleRightPanel(Boolean v)
 	{
-		if (m_panright.isVisible())
+		boolean vis = (v != null ? v : (!m_panright.isVisible()));
+		if (!vis)
 		{
 			m_sp.remove(m_panright);
 			m_panright.setVisible(false);

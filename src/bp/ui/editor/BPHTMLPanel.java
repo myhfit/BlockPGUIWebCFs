@@ -5,6 +5,7 @@ import java.awt.GridLayout;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 
+import javax.swing.Action;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
@@ -20,6 +21,8 @@ import bp.res.BPResource;
 import bp.res.BPResourceFileSystem;
 import bp.ui.scomp.BPHTMLCodePane;
 import bp.ui.scomp.BPHTMLView;
+import bp.ui.actions.BPActionConstCommon;
+import bp.ui.actions.BPActionHelpers;
 import bp.ui.scomp.BPEditorPane;
 import bp.ui.scomp.BPTextPane;
 import bp.ui.util.UIUtil;
@@ -90,9 +93,9 @@ public class BPHTMLPanel extends BPTextPanel
 		}
 	}
 
-	public void toggleRightPanel()
+	public void toggleRightPanel(Boolean v)
 	{
-		boolean canpreview = !m_canpreview;
+		boolean canpreview = (v != null ? v : (!m_canpreview));
 		m_canpreview = canpreview;
 		if (canpreview)
 		{
@@ -109,6 +112,12 @@ public class BPHTMLPanel extends BPTextPanel
 	protected BPTextPane createTextPane()
 	{
 		return new BPHTMLCodePane();
+	}
+
+	public Action[] getSeparatorActions()
+	{
+		Action acttr = BPActionHelpers.getAction(BPActionConstCommon.MF_MNUVIEWTOGGLERIGHTPAN, e -> toggleRightPanel());
+		return new Action[] { acttr };
 	}
 
 	public final static class BPEditorFactoryHTML implements BPEditorFactory
