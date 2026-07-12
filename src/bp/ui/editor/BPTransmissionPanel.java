@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.ServiceLoader;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 import javax.swing.Box;
 import javax.swing.JPanel;
@@ -32,6 +33,7 @@ import javax.swing.border.EmptyBorder;
 import bp.BPCore;
 import bp.config.BPConfig;
 import bp.config.UIConfigs;
+import bp.data.BPInstanceFactory;
 import bp.env.BPEnvManager;
 import bp.env.BPEnvTransmission;
 import bp.event.BPEventCoreUI;
@@ -39,21 +41,22 @@ import bp.format.BPFormat;
 import bp.format.BPFormatUnknown;
 import bp.res.BPResource;
 import bp.task.BPTask;
+import bp.task.BPTaskBase;
 import bp.task.BPTaskFactory;
 import bp.task.BPTaskTransmission;
 import bp.ui.actions.BPAction;
 import bp.ui.actions.BPActionConstCommon;
 import bp.ui.container.BPToolBarSQ;
 import bp.ui.dialog.BPDialogForm;
-import bp.ui.dialog.BPDialogNewTask;
 import bp.ui.editor.controller.BPEditorController;
-import bp.ui.form.BPFormManager;
+import bp.ui.form.BPForm;
 import bp.ui.res.icon.BPIconResV;
 import bp.ui.scomp.BPProgressBar;
 import bp.ui.scomp.BPTable;
 import bp.ui.scomp.BPTable.BPTableModel;
 import bp.ui.scomp.BPToolVIconButton;
 import bp.ui.table.BPTableFuncsTask;
+import bp.ui.util.CommonUIOperations;
 import bp.ui.util.UIStd;
 import bp.ui.util.UIUtil;
 import bp.util.ClassUtil;
@@ -352,22 +355,15 @@ public class BPTransmissionPanel extends JPanel implements BPEditor<JPanel>
 
 	protected void onAdd(ActionEvent e)
 	{
-		BPDialogNewTask dlg = new BPDialogNewTask();
-		dlg.setFilter((fac) ->
+		Predicate<BPInstanceFactory<BPTask<?>>> filter = fac -> BPTaskTransmission.CATEGORY_TRANSMISSION.equals(((BPTaskFactory) fac).getCategory());
+		Consumer<BPForm<?>> initformcb = form -> form.showData(ObjUtil.makeMap("workdir", BPEnvManager.getEnvValue(BPEnvTransmission.ENV_NAME_TRANSMISSION, BPEnvTransmission.ENVKEY_WORKDIR)));
+		BPTask<?> task = CommonUIOperations.showCreate(BPTaskFactory.class, dlg ->
 		{
-			String cat = fac.getCategory();
-			return BPTaskTransmission.CATEGORY_TRANSMISSION.equals(cat);
+			dlg.setFilter(filter);
+			dlg.setInitFormCallback(initformcb);
 		});
-		dlg.setInitFormCallback((form) ->
-		{
-			form.showData(ObjUtil.makeMap("workdir", BPEnvManager.getEnvValue(BPEnvTransmission.ENV_NAME_TRANSMISSION, BPEnvTransmission.ENVKEY_WORKDIR)));
-		});
-		dlg.setVisible(true);
-		BPTask<?> task = dlg.getTask();
 		if (task != null)
-		{
 			BPCore.addTask(task);
-		}
 	}
 
 	protected void onDel(ActionEvent e)
@@ -412,13 +408,13 @@ public class BPTransmissionPanel extends JPanel implements BPEditor<JPanel>
 			boolean isrun = task.isRunning();
 			BPDialogForm dlg = new BPDialogForm();
 			dlg.setEditable(!isrun);
-			Class<?> c = ClassUtil.tryLoopSuperClass((cls) ->
-			{
-				if (BPFormManager.containsKey(cls.getName()))
-					return cls;
-				return null;
-			}, task.getClass(), BPTask.class);
-			dlg.setup(c == null ? task.getClass().getName() : c.getName(), task);
+//			Class<?> c = ClassUtil.tryLoopSuperClass((cls) ->
+//			{
+//				if (BPFormManager.containsKey(cls.getName()))
+//					return cls;
+//				return null;
+//			}, task.getClass(), BPTask.class);
+			dlg.setup(task.getClass(), BPTaskBase.class, task);
 			dlg.setTitle(UIUtil.wrapBPTitle(BPActionConstCommon.TXT_TASK) + ":" + task.getName());
 			dlg.setPreferredSize(UIUtil.scaleUIDimension(new Dimension(700, 600)));
 			dlg.pack();

@@ -101,7 +101,8 @@ public class BPWebSiteOperationPanel extends BPCodePanel
 		m_sp0.setLeftComponent(pansp);
 		m_sp0.setRightComponent(m_result);
 		add(m_sp0, BorderLayout.CENTER);
-		m_sp0.setReservedSize((int) (400 * UIConfigs.UI_SCALE()) - 1);
+//		m_sp0.setReservedSize((int) (400 * UIConfigs.UI_SCALE()) - 1);
+		m_sp0.setDividerRatio(0.7d);
 
 		m_txt.setOnPosChanged(this::onPosChanged);
 		m_txt.resizeDoc();

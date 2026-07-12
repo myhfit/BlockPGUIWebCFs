@@ -14,6 +14,6 @@ public enum BPActionConstWebCFs implements BPActionConst
 
 	public String getPackName()
 	{
-		return "webcfs";
+		return "ac_webcfs";
 	}
 }

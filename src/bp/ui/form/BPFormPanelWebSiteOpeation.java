@@ -14,13 +14,13 @@ import javax.swing.Action;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import bp.typeext.KV;
 import bp.ui.actions.BPAction;
 import bp.ui.res.icon.BPIconResV;
 import bp.ui.scomp.BPCodePane;
 import bp.ui.scomp.BPComboBox;
 import bp.ui.scomp.BPComboBox.BPComboBoxModel;
 import bp.ui.scomp.BPKVTable;
-import bp.ui.scomp.BPKVTable.KV;
 import bp.ui.scomp.BPTextField;
 import bp.ui.util.UIStd;
 import bp.ui.util.UIUtil;

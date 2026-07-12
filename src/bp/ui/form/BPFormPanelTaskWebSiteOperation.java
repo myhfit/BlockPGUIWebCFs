@@ -12,7 +12,8 @@ import bp.res.BPResource;
 import bp.res.BPResourceFile;
 import bp.res.BPResourceFileSystem;
 import bp.res.BPResourceWebSiteLink;
-import bp.ui.dialog.BPDialogSelectResourceDir;
+import bp.ui.dialog.BPDialogSelectResource.SELECTSCOPE;
+import bp.ui.dialog.BPDialogSelectResource2;
 import bp.ui.scomp.BPTextField;
 import bp.ui.scomp.BPTextFieldPane;
 import bp.ui.util.CommonUIOperations;
@@ -61,10 +62,10 @@ public class BPFormPanelTaskWebSiteOperation extends BPFormPanelTask
 	protected String onSelectWSLink(String oldpath)
 	{
 		String rc = null;
-		BPDialogSelectResourceDir dlg = new BPDialogSelectResourceDir();
-		dlg.setProjectResource(true);
+		BPDialogSelectResource2 dlg = new BPDialogSelectResource2();
+		dlg.setScope(SELECTSCOPE.PROJECT);
 		dlg.setFilter(this::checkWSLink);
-		dlg.setVisible(true);
+		dlg.showOpen();
 		BPResource res = dlg.getSelectedResource();
 		if (res != null)
 		{

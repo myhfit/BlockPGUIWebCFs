@@ -6,7 +6,7 @@ import bp.ui.res.icon.BPIconResV;
 
 public class BPActionHelperWebCFs extends BPActionHelperBase<BPActionConstWebCFs>
 {
-	public final static String ACTIONHELPER_PACK_WEBCFS = "webcfs";
+	public final static String ACTIONHELPER_PACK_WEBCFS = "ac_webcfs";
 
 	public String getPackName()
 	{
